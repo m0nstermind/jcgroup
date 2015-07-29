@@ -1,24 +1,13 @@
 package me.haosdent.cgroup.manage;
 
-import static me.haosdent.cgroup.util.Constants.*;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import me.haosdent.cgroup.util.Shell;
-import org.apache.commons.io.IOUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Admin {
 
-  public static final String userConfName = "user_conf";
-  public static final String USER_CONF_KEY_NAME = "name";
-  public static final String USER_CONF_KEY_PASSWORD = "password";
   public static final String PATH_ROOT = ".";
   private Shell shell;
   private String name;
@@ -27,20 +16,7 @@ public class Admin {
   private Group rootGroup;
   private List<Group> groupList = new LinkedList<Group>();
 
-  private static final Logger LOG = LoggerFactory.getLogger(Admin.class);
-
   public Admin(String name, String password, int subsystems) throws IOException {
-    init(name, password, subsystems);
-  }
-
-  public Admin(int subsystems) throws IOException {
-    String content =
-        IOUtils.toString(this.getClass().getClassLoader()
-            .getResourceAsStream(userConfName));
-    JSONObject json = JSON.parseObject(content);
-    String name = json.getString(USER_CONF_KEY_NAME);
-    String password = json.getString(USER_CONF_KEY_PASSWORD);
-
     init(name, password, subsystems);
   }
 

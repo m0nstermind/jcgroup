@@ -6,6 +6,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import me.haosdent.cgroup.Tests;
+
 import java.io.IOException;
 
 import static org.junit.Assert.*;
@@ -26,7 +28,7 @@ public class AdminTest {
   @Test
   public void testUmount() {
     try {
-      Admin admin = new Admin(SUBSYS_CPU);
+      Admin admin = Tests.admin(SUBSYS_CPU);
       admin.umount();
     } catch (IOException e) {
       LOG.error("Create Admin error.", e);
@@ -37,7 +39,7 @@ public class AdminTest {
   @Test
   public void testCreateGroup() {
     try {
-      Admin admin = new Admin(SUBSYS_CPU);
+      Admin admin = Tests.admin(SUBSYS_CPU);
       admin.createGroup("one", SUBSYS_CPU);
       admin.umount();
     } catch (IOException e) {

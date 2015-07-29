@@ -1,5 +1,6 @@
 package me.haosdent.cgroup.subsystem;
 
+import me.haosdent.cgroup.Tests;
 import me.haosdent.cgroup.manage.Admin;
 import me.haosdent.cgroup.manage.Group;
 import me.haosdent.cgroup.util.Constants;
@@ -22,7 +23,7 @@ public class NetClsTest {
   @BeforeClass
   public static void setUpClass() {
     try {
-      admin = new Admin(Constants.SUBSYS_NET_CLS);
+      admin = Tests.admin(Constants.SUBSYS_NET_CLS);
       root = admin.getRootGroup();
       one = admin.createGroup("one", Constants.SUBSYS_NET_CLS);
       two = admin.createGroup("two", Constants.SUBSYS_NET_CLS);

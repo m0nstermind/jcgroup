@@ -1,5 +1,6 @@
 package me.haosdent.cgroup.subsystem;
 
+import me.haosdent.cgroup.Tests;
 import me.haosdent.cgroup.manage.Admin;
 import me.haosdent.cgroup.manage.Group;
 import me.haosdent.cgroup.util.Constants;
@@ -22,7 +23,7 @@ public class BlkioTest {
   @BeforeClass
   public static void setUpClass() {
     try {
-      admin = new Admin(Constants.SUBSYS_BLKIO);
+      admin = Tests.admin(Constants.SUBSYS_BLKIO);
       root = admin.getRootGroup();
       one = admin.createGroup("one", Constants.SUBSYS_BLKIO);
       two = admin.createGroup("two", Constants.SUBSYS_BLKIO);

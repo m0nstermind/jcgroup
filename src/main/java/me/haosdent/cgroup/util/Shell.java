@@ -2,20 +2,14 @@ package me.haosdent.cgroup.util;
 
 import static me.haosdent.cgroup.util.Constants.*;
 
-import com.google.common.annotations.VisibleForTesting;
 import me.haosdent.cgroup.manage.Admin;
-import me.haosdent.cgroup.subsystem.Cpu;
-import org.apache.commons.io.IOUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class Shell {
 
-  private static final Logger LOG = LoggerFactory.getLogger(Shell.class);
   Admin admin;
   String prefix;
 
@@ -28,7 +22,6 @@ public class Shell {
     this.prefix = sb.toString();
   }
 
-  @VisibleForTesting
   public Shell() {
   }
 
@@ -82,15 +75,12 @@ public class Shell {
     if (isPrivilege) {
       cmd = prefix + cmd;
     }
-    LOG.info("Shell cmd:" + cmd);
     Process process = Runtime.getRuntime().exec(new String[]{"/bin/sh", "-c", cmd});
     try {
       process.waitFor();
-      String output = IOUtils.toString(process.getInputStream());
-      String errorOutput = IOUtils.toString(process.getErrorStream());
-      LOG.info("Shell Output:" + output);
+      String output = toString(process.getInputStream());
+      String errorOutput = toString(process.getErrorStream());
       if (errorOutput.length() != 0 && !errorOutput.contains("[sudo] password for") && !errorOutput.contains("Password:")) {
-        LOG.error("Shell Error Output:" + errorOutput);
         throw new IOException(errorOutput);
       }
       return output;
@@ -99,7 +89,18 @@ public class Shell {
     }
   }
 
-  public void mount(String name, int subsystems) throws IOException {
+  private String toString(InputStream stream) throws IOException
+  {
+      InputStreamReader reader = new InputStreamReader(stream);
+      StringBuilder sb = new StringBuilder();
+      for (int ch = reader.read(); ch >=0 ; ch=reader.read()) {
+          sb.append((char)ch);
+      }
+      
+      return sb.toString();
+  }
+
+public void mount(String name, int subsystems) throws IOException {
     String path = String.format(PREFIX_CGROUP_DIR, name);
     mkdir(path);
     StringBuilder flag = getSubsystemsFlag(subsystems);

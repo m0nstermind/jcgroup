@@ -1,5 +1,6 @@
 package me.haosdent.cgroup.subsystem;
 
+import me.haosdent.cgroup.Tests;
 import me.haosdent.cgroup.manage.Admin;
 import me.haosdent.cgroup.manage.Group;
 import me.haosdent.cgroup.util.Constants;
@@ -23,7 +24,7 @@ public class MemoryTest {
   @BeforeClass
   public static void setUpClass() {
     try {
-      admin = new Admin(Constants.SUBSYS_MEMORY);
+      admin = Tests.admin(Constants.SUBSYS_MEMORY);
       root = admin.getRootGroup();
       one = admin.createGroup("one", Constants.SUBSYS_MEMORY);
       two = admin.createGroup("two", Constants.SUBSYS_MEMORY);

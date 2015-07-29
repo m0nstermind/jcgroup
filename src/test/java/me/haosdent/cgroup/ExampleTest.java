@@ -25,7 +25,7 @@ public class ExampleTest {
   @BeforeClass
   public static void setUpClass() {
     try {
-      admin = new Admin(Constants.SUBSYS_CPUSET | Constants.SUBSYS_CPU);
+      admin = Tests.admin(Constants.SUBSYS_CPUSET | Constants.SUBSYS_CPU);
       root = admin.getRootGroup();
       one = admin.createGroup("one", Constants.SUBSYS_CPUSET | Constants.SUBSYS_CPU);
       two = admin.createGroup("two", Constants.SUBSYS_CPUSET | Constants.SUBSYS_CPU);

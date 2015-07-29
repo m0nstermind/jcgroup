@@ -1,5 +1,6 @@
 package me.haosdent.cgroup.util;
 
+import me.haosdent.cgroup.Tests;
 import me.haosdent.cgroup.manage.Admin;
 import me.haosdent.cgroup.subsystem.Cpu;
 import org.junit.After;
@@ -27,7 +28,7 @@ public class ShellTest {
   @Test
   public void testExecWithPrivilege() {
     try {
-      Admin admin = new Admin(Constants.SUBSYS_CPU);
+      Admin admin = Tests.admin(Constants.SUBSYS_CPU);
       Shell shell = admin.getShell();
       String output = shell.exec("echo 0", true);
       assertTrue(output.equals("0\n"));

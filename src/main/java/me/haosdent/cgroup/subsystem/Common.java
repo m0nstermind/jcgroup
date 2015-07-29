@@ -3,8 +3,6 @@ package me.haosdent.cgroup.subsystem;
 import me.haosdent.cgroup.manage.Group;
 import me.haosdent.cgroup.util.Constants;
 import me.haosdent.cgroup.util.Shell;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -17,7 +15,6 @@ public abstract class Common {
   public static final String PROP_COMMON_NOTIFY_ON_RELEASE =
       "notify_on_release";
   public static final String PROP_COMMON_RELEASE_AGENT = "release_agent";
-  private static final Logger LOG = LoggerFactory.getLogger(Common.class);
   public List<Integer> taskList = new LinkedList<Integer>();
   protected Shell shell;
   protected Group group;

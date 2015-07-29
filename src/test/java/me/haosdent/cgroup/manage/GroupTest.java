@@ -6,6 +6,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import me.haosdent.cgroup.Tests;
+
 import java.io.IOException;
 
 import static org.junit.Assert.*;
@@ -26,7 +28,7 @@ public class GroupTest {
   @Test
   public void testDelete() {
     try {
-      Admin admin = new Admin(SUBSYS_CPU);
+      Admin admin = Tests.admin(SUBSYS_CPU);
       Group one = admin.createGroup("one", SUBSYS_CPU);
       one.delete();
       admin.umount();

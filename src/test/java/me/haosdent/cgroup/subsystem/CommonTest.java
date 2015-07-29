@@ -1,5 +1,6 @@
 package me.haosdent.cgroup.subsystem;
 
+import me.haosdent.cgroup.Tests;
 import me.haosdent.cgroup.manage.Admin;
 import me.haosdent.cgroup.manage.Group;
 import me.haosdent.cgroup.util.Constants;
@@ -23,7 +24,7 @@ public class CommonTest {
   @BeforeClass
   public static void setUpClass() {
     try {
-      admin = new Admin(Constants.SUBSYS_CPU);
+      admin = Tests.admin(Constants.SUBSYS_CPU);
       root = admin.getRootGroup();
       one = admin.createGroup("one", Constants.SUBSYS_CPU);
       two = admin.createGroup("two", Constants.SUBSYS_CPU);

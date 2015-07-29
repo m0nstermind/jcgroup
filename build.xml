@@ -62,7 +62,8 @@
     	
     	<artifact:mvn pom="${root.dir}/pom.xml" mavenversion="2.0.11" >
             <arg value="-DskipTests"/>
-    	    <arg value="assembly:assembly"/>
+            <arg value="clean"/>
+            <arg value="package"/>
         </artifact:mvn>
     	
     	<move file="${pom.build.directory}/${pom.build.finalName}.jar" tofile="${build.components}/${ant.project.name}-${build.number.str}.jar"/>
